@@ -20,6 +20,7 @@ public class Library {
             return book.toString();
         }
 
+
         public int searchBookByName(String text) {
             int rez = 0;
             String nameBook;

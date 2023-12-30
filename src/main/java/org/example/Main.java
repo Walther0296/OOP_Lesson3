@@ -48,7 +48,7 @@ public class Main {
 
         System.out.println("Сейчас в каталоге книг - " + catalog.getCountBook());
         for (int i = 0; i < 10; i++) {
-            System.out.println("Что будем делать: 0-Добавить книгу; 1-Найти книгу; 2-Удалить книгу");
+            System.out.println("Что будем делать: 0-Добавить книгу; 1-Найти книгу; 2- Вывести список книг; 3-Удалить книгу");
             what = whatDo(pers);
             if (what == 1) {
                 iterator(pers, catalog);
@@ -58,6 +58,10 @@ public class Main {
                 System.out.println("В каталоге книг - " + catalog.getCountBook());
             }
             if (what == 2) {
+                getBooks(pers, catalog);
+                System.out.println("В каталоге книг - " + catalog.getCountBook());
+            }
+            if (what == 3) {
                 if (catalog.getCountBook() > 0 ) {
                     removeCatalogBook(pers, catalog);
                     System.out.println("В каталоге осталось книг - " + catalog.getCountBook());
@@ -72,10 +76,10 @@ public class Main {
         int d;
         do {
             d = pers.getAnswer();
-            if (d != 0 & d != 1 & d != 2) {
-                System.out.println("Укажите что нужно сделать: 0-Добавить книгу; 1-Найти книгу; 2-Удалить книгу");
+            if (d != 0 & d != 1 & d != 2 & d != 3) {
+                System.out.println("Укажите что нужно сделать: 0-Добавить книгу; 1-Найти книгу; 2- Вывести список книг; 3-Удалить книгу");
             }
-        } while(d != 0 & d != 1 & d != 2);
+        } while(d != 0 & d != 1 & d != 2 & d != 3 );
         return d;
     }
 
@@ -110,7 +114,7 @@ public class Main {
             numBook = pers.getAnswer();
         } while(numBook < 1 || numBook > catalog.getCountBook());
         --numBook;
-        System.out.println("Вы уверены что хотите удалить книну: " + catalog.getBookInfoById(numBook) + "?");
+        System.out.println("Вы уверены что хотите удалить книгу: " + catalog.getBookInfoById(numBook) + "?");
         System.out.println("0-нет; 1-да");
         int ans;
         do {
@@ -118,6 +122,11 @@ public class Main {
         } while (ans != 0 & ans != 1);
         if (ans == 1) {
             catalog.removeBook(numBook);
+        }
+    }
+    static void getBooks (Reader pers, Library catalog){
+        for (int i = 0; i < catalog.getCountBook(); i++) {
+            System.out.println(catalog.searchBookByName(pers.getString()));
         }
     }
 }
